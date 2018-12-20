@@ -1,31 +1,33 @@
+/* eslint-disable global-require */
+
+import path from 'path'
 import { app, BrowserWindow } from 'electron'
-import installExtension, {
-  REACT_DEVELOPER_TOOLS
-} from 'electron-devtools-installer'
-import { enableLiveReload } from 'electron-compile'
+
+// Handle creating/removing shortcuts on Windows when installing/uninstalling.
+if (require('electron-squirrel-startup')) {
+  app.quit()
+}
+
+const isDevMode = process.execPath.match(/[\\/]node_modules\/electron/)
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-const isDevMode = process.execPath.match(/[\\/]electron/)
-
-if (isDevMode) enableLiveReload({ strategy: 'react-hmr' })
-
-const createWindow = async () => {
+const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600
   })
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  // mainWindow.maximize();
 
-  // Open the DevTools.
+  // and load the index.html of the app.
   if (isDevMode) {
-    await installExtension(REACT_DEVELOPER_TOOLS)
-    mainWindow.webContents.openDevTools()
+    mainWindow.loadURL('http://localhost:9000/')
+  } else {
+    mainWindow.loadURL(`file://${path.resolve(__dirname, '..', 'dist')}/index.html`)
   }
 
   // Emitted when the window is closed.
@@ -35,6 +37,17 @@ const createWindow = async () => {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+  // Open the DevTools.
+  if (isDevMode) {
+    const { enableLiveReload } = require('electron-compile')
+    const { REACT_DEVELOPER_TOOLS, default: installExtension } = require('electron-devtools-installer')
+
+    enableLiveReload({ strategy: 'react-hmr' })
+    installExtension(REACT_DEVELOPER_TOOLS).then(() => {
+      mainWindow.webContents.openDevTools()
+    })
+  }
 }
 
 // This method will be called when Electron has finished
