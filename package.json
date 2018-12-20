@@ -9,11 +9,14 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --cache --color --ext .jsx,.js src"
+    "fixcode": "standard --fix",
+    "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
+    "lint": "standard --verbose --color | snazzy",
+    "git-hook": "npm run lint -s"
   },
   "keywords": [],
   "author": "Doko",
-  "license": "MIT",
+  "license": "ISC",
   "config": {
     "forge": {
       "make_targets": {
@@ -29,19 +32,32 @@
         ]
       },
       "electronPackagerConfig": {
-        "packageManager": "yarn"
+        "packageManager": "yarn",
+        "asar": true,
+        "arch": "all",
+        "ignore": [
+          ".vscode",
+          ".cache",
+          "__mocks__",
+          "__tests__",
+          "src",
+          "template",
+          "out",
+          "docs",
+          "screenshots"
+        ]
       },
       "electronWinstallerConfig": {
-        "name": "pos_app_react"
+        "name": "POS App React"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "",
-        "name": ""
+        "owner": "acaziasoftcom",
+        "name": "electron-react-blueprint"
       },
       "windowsStoreConfig": {
-        "packageName": "",
+        "packageName": "com.acaziasoft.electron",
         "name": "posappreact"
       }
     }

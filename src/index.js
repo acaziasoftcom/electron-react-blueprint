@@ -1,5 +1,7 @@
 import { app, BrowserWindow } from 'electron'
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
+import installExtension, {
+  REACT_DEVELOPER_TOOLS
+} from 'electron-devtools-installer'
 import { enableLiveReload } from 'electron-compile'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -13,7 +15,7 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' })
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600
   })
 
