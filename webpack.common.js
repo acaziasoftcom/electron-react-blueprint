@@ -7,7 +7,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist/**/*']),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './app/index.html',
       title: 'POS App'
     })
   ],
@@ -16,12 +16,6 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
         use: ['file-loader']
-      },
-      {
-        enforce: 'pre',
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'eslint-loader'
       },
       {
         test: /\.jsx?$/,

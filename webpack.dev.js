@@ -77,8 +77,7 @@ module.exports = merge(common, {
           {
             loader: 'stylus-loader'
           }
-        ],
-        fallback: 'style-loader'
+        ]
       }
     ]
   }
