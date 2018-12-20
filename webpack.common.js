@@ -2,7 +2,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: [
+    'babel-polyfill',
+    './src/index.js',
+    require.resolve('react-dev-utils/webpackHotDevClient')
+  ],
   target: 'electron-main',
   plugins: [
     new CleanWebpackPlugin(['dist/**/*']),
@@ -20,9 +24,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader'
-        }
+        loader: 'babel-loader'
       }
     ]
   },

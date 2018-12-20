@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const common = require('./webpack.common')
 
 module.exports = merge(common, {
@@ -17,29 +18,50 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    })
   ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
+  },
   module: {
     rules: [
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(scss|sass)$/,
         use: [
           {
             loader: 'style-loader',
             options: { sourceMap: true }
           },
           {
-            loader: 'css-loader',
+            loader: require.resolve('css-loader'),
             options: {
-              sourceMap: true,
+              sourceMap: false,
               modules: true,
               localIdentName: '[name]_[local]_[hash:base64:10]',
               importLoaders: 1
             }
           },
           {
-            loader: 'sass-loader',
-            options: { sourceMap: true }
+            loader: 'sass-loader'
           }
         ]
       },
