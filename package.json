@@ -22,7 +22,7 @@
   },
   "keywords": [],
   "author": "Doko",
-  "license": "ISC",
+  "license": "MIT",
   "config": {
     "forge": {
       "make_targets": {
