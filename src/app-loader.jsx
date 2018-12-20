@@ -4,7 +4,7 @@ import './app-loader.scss'
 export default class App extends React.Component {
   render () {
     return (
-      <div>
+      <div className=''>
         <h2>Welcome to React!</h2>
       </div>
     )
