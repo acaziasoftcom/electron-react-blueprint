@@ -1,13 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require('path')
-const webpack = require('webpack')
 
 module.exports = {
   entry: [
     'babel-polyfill',
-    './src/index.js',
-    require.resolve('react-dev-utils/webpackHotDevClient')
+    './src/index.js'
   ],
 
   output: {
@@ -22,13 +19,9 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(['dist/**/*']),
     new HtmlWebpackPlugin({
       template: './app/index.html',
-      title: 'POS App',
-      inject: 'body',
-      sw_enabled: process.env.NODE_ENV === 'production'
+      title: 'POS App'
     })
   ],
   module: {

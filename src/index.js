@@ -1,6 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 
 import App from './app-loader'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+render(
+  <AppContainer>
+    <App />
+  </AppContainer>,
+  document.getElementById('root')
+)

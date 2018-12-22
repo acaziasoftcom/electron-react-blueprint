@@ -5,7 +5,7 @@
   "description": "My Electron application description",
   "main": "app/index.js",
   "scripts": {
-    "start": "run-p webpack forge:start",
+    "start": "NODE_ENV=development run-p webpack forge:start",
     "build": "run-s webpack:build forge:package",
     "forge:start": "electron-forge start",
     "forge:package": "electron-forge package",

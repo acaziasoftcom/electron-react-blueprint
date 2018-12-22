@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const common = require('./webpack.common')
 
 module.exports = merge(common, {
+  target: 'electron-renderer',
   mode: 'development',
   devtool: 'eval-source-map',
   output: {
@@ -21,7 +22,11 @@ module.exports = merge(common, {
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css'
+    }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development'
     })
+
   ],
   optimization: {
     splitChunks: {

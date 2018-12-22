@@ -17,15 +17,17 @@ let mainWindow
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 800,
     height: 600
   })
 
   // mainWindow.maximize();
 
   // and load the index.html of the app.
-  if (isDevMode) {
+  console.log('isDevMode: ', process.env.NODE_ENV)
+  if (process.env.NODE_ENV === 'development') {
     mainWindow.loadURL('http://localhost:9000/')
+    // mainWindow.loadURL(`file://${path.resolve(__dirname, '..', 'dist')}/index.html`);
   } else {
     mainWindow.loadURL(`file://${path.resolve(__dirname, '..', 'dist')}/index.html`)
   }
