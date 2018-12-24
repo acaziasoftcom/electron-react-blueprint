@@ -59,8 +59,8 @@ module.exports = merge(common, {
           {
             loader: require.resolve('css-loader'),
             options: {
-              sourceMap: false,
-              modules: true,
+              sourceMap: true,
+              modules: false,
               localIdentName: '[name]_[local]_[hash:base64:10]',
               importLoaders: 1
             }
